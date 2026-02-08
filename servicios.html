@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios | Moon Dev & Tech</title>
+    
+    <meta name="description" content="Servicios de mantenimiento, automatización en Excel y páginas web en Villahermosa, Tabasco.">
+    <link rel="icon" type="image/png" href="img/logo_moon.png">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <style>
+        #content-area { margin-top: 30px; }
+
+        /* --- HERO --- */
+        .services-hero {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-sidebar));
+            border: 1px solid var(--border); border-radius: 16px;
+            padding: 40px; text-align: center; margin-bottom: 40px;
+            position: relative; overflow: hidden;
+        }
+        .hero-bg-icon {
+            position: absolute; top: -20px; right: -20px;
+            font-size: 200px; color: var(--accent); opacity: 0.03; transform: rotate(15deg);
+        }
+        .services-hero h1 { font-size: 2rem; margin-bottom: 10px; color: var(--text-primary); }
+        .services-hero p { color: var(--text-secondary); max-width: 600px; margin: 0 auto 25px auto; font-size: 1.05rem; }
+
+        /* --- GRID DE SERVICIOS --- */
+        .services-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px; margin-bottom: 40px;
+        }
+
+        .service-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 16px; padding: 30px;
+            transition: transform 0.2s, border-color 0.2s;
+            display: flex; flex-direction: column; height: 100%;
+        }
+        .service-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+
+        .icon-wrapper {
+            width: 60px; height: 60px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 32px; margin-bottom: 20px;
+        }
+        
+        /* Colores por categoría */
+        .web-style { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; } /* Violeta */
+        .hw-style { background: rgba(59, 130, 246, 0.1); color: #3b82f6; } /* Azul */
+        .rescue-style { background: rgba(239, 68, 68, 0.1); color: #ef4444; } /* Rojo */
+        .auto-style { background: rgba(16, 185, 129, 0.1); color: #10b981; } /* Verde */
+
+        .service-card h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--text-primary); }
+        .service-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
+
+        .service-features { list-style: none; padding: 0; margin-bottom: 20px; }
+        .service-features li {
+            display: flex; align-items: center; gap: 10px;
+            color: var(--text-primary); font-size: 0.9rem; margin-bottom: 8px;
+        }
+        .service-features li i { color: var(--accent); font-size: 16px; }
+
+        .card-footer-btn {
+            width: 100%; padding: 12px; border: 1px solid var(--border); background: transparent;
+            border-radius: 8px; color: var(--text-primary); font-weight: 600; cursor: pointer; transition: 0.2s;
+        }
+        .card-footer-btn:hover { background: var(--hover); color: var(--accent); border-color: var(--accent); }
+
+        /* --- PÓLIZAS --- */
+        .poliza-section {
+            background: var(--bg-sidebar); border: 1px solid var(--border);
+            border-radius: 16px; padding: 30px; display: flex; align-items: center; justify-content: space-between;
+            gap: 20px; flex-wrap: wrap;
+        }
+        .poliza-content h3 { color: var(--text-primary); margin-bottom: 10px; }
+        .poliza-content p { color: var(--text-secondary); max-width: 600px; }
+        .btn-poliza {
+            background: var(--accent); color: white; border: none; padding: 12px 24px;
+            border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <img src="img/logo_moon.png" alt="Moon Logo" class="logo-img">
+                    <span class="logo-text">Moon Dev & Tech</span>
+                </div>
+                <button id="sidebar-toggle" class="toggle-btn"><i class="ph ph-caret-left"></i></button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-item"><i class="ph ph-house"></i><span class="nav-text">Inicio</span></a></li>
+                    <li><a href="desarrollo.html" class="nav-item"><i class="ph ph-code"></i><span class="nav-text">Desarrollo Web</span></a></li>
+                    <li><a href="servicios.html" class="nav-item active"><i class="ph ph-wrench"></i><span class="nav-text">Servicios Técnicos</span></a></li>
+                    <li><a href="contacto.html" class="nav-item"><i class="ph ph-paper-plane-tilt"></i><span class="nav-text">Contáctame</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            
+            <header class="top-bar">
+                <div class="left-section">
+                    <button id="mobile-menu-btn" class="mobile-only"><i class="ph ph-list"></i></button>
+                    <div class="view-indicator"><i class="ph ph-wrench"></i><span>CATÁLOGO DE SERVICIOS</span></div>
+                </div>
+
+                <div class="theme-controls">
+                    <div class="theme-variant-container" id="variant-container">
+                        <i class="ph ph-palette"></i>
+                        <select id="variant-switcher">
+                            <option value="light">Corporativo</option>
+                            <option value="academia">Academia Moon</option>
+                        </select>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="main-toggle">
+                        <i class="ph ph-moon"></i>
+                        <label class="switch">
+                            <input type="checkbox" id="dark-mode-toggle" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </header>
+
+            <section id="content-area">
+
+                <div class="services-hero">
+                    <i class="ph ph-gear hero-bg-icon"></i>
+                    <h1>Soluciones Técnicas & Digitales</h1>
+                    <p>
+                        Diagnóstico preciso, armado de equipos y automatización administrativa.
+                        Soluciones explicadas de forma fácil y con manuales incluidos.
+                    </p>
+                    <button class="btn-primary" style="padding: 12px 25px; border-radius: 8px; border:none; font-size:1rem; cursor:pointer;" onclick="window.location.href='contacto.html'">
+                        Agendar Cita
+                    </button>
+                </div>
+
+                <div class="services-grid">
+                    
+                    <div class="service-card">
+                        <div class="icon-wrapper web-style"><i class="ph ph-globe"></i></div>
+                        <h3>Web & Conectividad</h3>
+                        <p>Presencia digital express y configuración de redes sin obras complicadas.</p>
+                        <ul class="service-features">
+                            <li><i class="ph ph-check-circle"></i> Landing Pages (Sitios rápidos)</li>
+                            <li><i class="ph ph-check-circle"></i> Micro-arreglos Web</li>
+                            <li><i class="ph ph-check-circle"></i> Configuración WiFi Mesh / Cámaras</li>
+                            <li><i class="ph ph-check-circle"></i> Gestión de cuentas y accesos</li>
+                        </ul>
+                        <button class="card-footer-btn" onclick="window.location.href='contacto.html?asunto=Web_Config'">Cotizar</button>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="icon-wrapper hw-style"><i class="ph ph-desktop-tower"></i></div>
+                        <h3>Hardware & Armado</h3>
+                        <p>Asesoría para armar tu PC ideal (DD Tech) y mantenimiento de laptops.</p>
+                        <ul class="service-features">
+                            <li><i class="ph ph-check-circle"></i> Asesoría de compra y Armado PC</li>
+                            <li><i class="ph ph-check-circle"></i> Cambio de Pantallas y Teclados</li>
+                            <li><i class="ph ph-check-circle"></i> Cambio de Baterías</li>
+                            <li><i class="ph ph-check-circle"></i> Instalación de Impresoras</li>
+                        </ul>
+                        <button class="card-footer-btn" onclick="window.location.href='contacto.html?asunto=Hardware'">Solicitar</button>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="icon-wrapper rescue-style"><i class="ph ph-hard-drives"></i></div>
+                        <h3>Soporte & Datos</h3>
+                        <p>Actualización de velocidad y recuperación de información crítica.</p>
+                        <ul class="service-features">
+                            <li><i class="ph ph-check-circle"></i> Cambio a SSD + Clonación de datos</li>
+                            <li><i class="ph ph-check-circle"></i> Recuperación de USB (Virus)</li>
+                            <li><i class="ph ph-check-circle"></i> Desbloqueo de iPad/Tablets</li>
+                            <li><i class="ph ph-check-circle"></i> Rescate de disco (Case USB externo)</li>
+                        </ul>
+                        <button class="card-footer-btn" onclick="window.location.href='contacto.html?asunto=Soporte'">Ayuda</button>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="icon-wrapper auto-style"><i class="ph ph-file-text"></i></div>
+                        <h3>Automatización & Guías</h3>
+                        <p>Automatizo tus reportes en Excel y te entrego el manual de cómo usarlo.</p>
+                        <ul class="service-features">
+                            <li><i class="ph ph-check-circle"></i> Macros VBA para Reportes</li>
+                            <li><i class="ph ph-check-circle"></i> Configuración Reloj Checador</li>
+                            <li><i class="ph ph-check-circle"></i> <strong>Plus:</strong> Mini-manuales de usuario</li>
+                            <li><i class="ph ph-check-circle"></i> Documentación fácil y visual</li>
+                        </ul>
+                        <button class="card-footer-btn" onclick="window.location.href='contacto.html?asunto=Macros'">Cotizar</button>
+                    </div>
+
+                </div>
+
+                <div class="poliza-section">
+                    <div class="poliza-content">
+                        <h3><i class="ph ph-shield-check" style="color: var(--accent); margin-right: 8px;"></i>Póliza de Mantenimiento Mensual</h3>
+                        <p>
+                            ¿Tienes un pequeño negocio? Ofrezco un plan de visitas periódicas para mantener tus equipos al día
+                            y resolver dudas operativas al instante.
+                        </p>
+                    </div>
+                    <button class="btn-poliza" onclick="window.location.href='contacto.html?asunto=Poliza'">Consultar Planes</button>
+                </div>
+
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

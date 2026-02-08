@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desarrollo | Moon Dev & Tech</title>
+    <link rel="icon" type="image/png" href="img/logo_moon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <style>
+        #content-area { margin-top: 30px; }
+
+        /* --- HERO PROJECT (DoSys) --- */
+        .hero-project {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-sidebar));
+            border: 1px solid var(--border); border-radius: 20px;
+            padding: 0; overflow: hidden; margin-bottom: 40px;
+            display: grid; grid-template-columns: 1.2fr 0.8fr;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.2);
+        }
+
+        .project-content { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+        .project-badge { 
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(251, 191, 36, 0.1); color: #fbbf24; 
+            padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;
+            width: fit-content; margin-bottom: 15px; border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+        
+        .hero-project h2 { font-size: 2rem; margin-bottom: 15px; color: var(--text-primary); }
+        .hero-project p { color: var(--text-secondary); line-height: 1.6; margin-bottom: 25px; }
+
+        .tech-stack-row { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        
+        .project-visual {
+            background: var(--bg-main);
+            position: relative; display: flex; align-items: center; justify-content: center;
+            border-left: 1px solid var(--border);
+            min-height: 300px;
+        }
+        
+        /* --- GRID DE PROYECTOS SECUNDARIOS --- */
+        .projects-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px; margin-bottom: 40px;
+        }
+
+        .project-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 16px; padding: 25px; transition: transform 0.2s;
+            display: flex; flex-direction: column; height: 100%;
+        }
+        .project-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .links { display: flex; gap: 10px; }
+        .link-icon { color: var(--text-secondary); font-size: 20px; cursor: pointer; transition: 0.2s; }
+        .link-icon:hover { color: var(--text-primary); }
+
+        .project-card h3 { margin-bottom: 10px; color: var(--text-primary); font-size: 1.2rem; }
+        .project-card p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1; }
+        .card-tech { display: flex; gap: 10px; font-size: 0.8rem; color: var(--text-secondary); font-family: monospace; }
+
+        /* --- CARD "HIRE ME" --- */
+        .hire-me-card {
+            background: linear-gradient(to right, var(--bg-sidebar), var(--bg-card));
+            border: 1px solid var(--border); border-radius: 20px; padding: 35px;
+            display: flex; align-items: center; justify-content: space-between; gap: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .hire-content h2 { font-size: 1.6rem; margin-bottom: 15px; color: var(--text-primary); }
+        .hire-content p { color: var(--text-secondary); margin-bottom: 25px; max-width: 600px; line-height: 1.6; }
+        
+        .value-props { display: flex; gap: 20px; flex-wrap: wrap; }
+        .prop-item { display: flex; align-items: center; gap: 10px; color: var(--text-primary); font-weight: 500; }
+        .prop-icon { 
+            width: 32px; height: 32px; background: rgba(16, 185, 129, 0.1); color: #10b981;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px;
+        }
+
+        @media (max-width: 900px) {
+            .hero-project { grid-template-columns: 1fr; }
+            .project-visual { height: 200px; border-left: none; border-top: 1px solid var(--border); }
+            .hire-me-card { flex-direction: column; text-align: left; align-items: start; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <img src="img/logo_moon.png" alt="Moon Logo" class="logo-img">
+                    <span class="logo-text">Moon Dev & Tech</span>
+                </div>
+                <button id="sidebar-toggle" class="toggle-btn"><i class="ph ph-caret-left"></i></button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-item"><i class="ph ph-house"></i><span class="nav-text">Inicio</span></a></li>
+                    <li><a href="desarrollo.html" class="nav-item active"><i class="ph ph-code"></i><span class="nav-text">Desarrollo Web</span></a></li>
+                    <li><a href="servicios.html" class="nav-item"><i class="ph ph-wrench"></i><span class="nav-text">Servicios Técnicos</span></a></li>
+                    <li><a href="contacto.html" class="nav-item"><i class="ph ph-paper-plane-tilt"></i><span class="nav-text">Contáctame</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            
+            <header class="top-bar">
+                <div class="left-section">
+                    <button id="mobile-menu-btn" class="mobile-only"><i class="ph ph-list"></i></button>
+                    <div class="view-indicator"><i class="ph ph-code"></i><span>PORTAFOLIO DE DESARROLLO</span></div>
+                </div>
+
+                <div class="theme-controls">
+                    <div class="theme-variant-container" id="variant-container">
+                        <i class="ph ph-palette"></i>
+                        <select id="variant-switcher">
+                            <option value="light">Corporativo</option>
+                            <option value="academia">Academia Moon</option>
+                        </select>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="main-toggle">
+                        <i class="ph ph-moon"></i>
+                        <label class="switch">
+                            <input type="checkbox" id="dark-mode-toggle" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </header>
+
+            <section id="content-area">
+
+                <div class="hero-project">
+                    <div class="project-content">
+                        <div class="project-badge"><i class="ph ph-trophy"></i> Proyecto Premiado</div>
+                        <h2>DoSys: Sistema de Gestión</h2>
+                        <p>
+                            Sistema integral para la administración de donaciones. Como <strong>Líder de Proyecto</strong>, 
+                            coordiné al equipo y fui responsable de la <strong>Arquitectura Frontend</strong> y UI/UX.
+                            Proyecto en evolución con enfoque en usabilidad y automatización.
+                            <br><span style="font-size: 0.9rem; color: var(--accent); margin-top: 10px; display: block;">🏆 Doble Medalla de Plata Infomatrix 2025</span>
+                        </p>
+                        <div class="tech-stack-row">
+                            <span class="tech-tag">Frontend UI</span>
+                            <span class="tech-tag">Liderazgo</span>
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">Bootstrap</span>
+                        </div>
+                        <div style="display: flex; gap: 15px;">
+                            <button class="btn-primary" style="padding: 10px 20px; border-radius: 8px; border:none; cursor: pointer;" onclick="window.open('https://monica-camacho.github.io/Proyecto-Dosys/', '_blank')">
+                                <i class="ph ph-eye" style="margin-right: 5px;"></i> Ver Proyecto
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="project-visual" style="padding: 0; background: none;">
+                        <img src="img/Dosys.png" alt="Interfaz DoSys" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9;">
+                    </div>
+                </div>
+
+                <h3 style="margin-bottom: 20px; color: var(--text-primary);">Más Proyectos</h3>
+
+                <div class="projects-grid">
+                    
+                    <div class="project-card">
+                        <div class="card-header">
+                            <img src="img/logo_xplora.svg" alt="Xplora" style="height: 40px; object-fit: contain;">
+                            
+                            <div class="links">
+                                <i class="ph ph-github-logo link-icon" title="Ver Código" onclick="window.open('https://github.com/Monica-Camacho', '_blank')"></i>
+                            </div>
+                        </div>
+                        <h3>Agencia de Viajes Xplora</h3>
+                        <p>Landing page responsiva para turismo. Enfoque en diseño visual atractivo (UI), maquetación semántica y estructura limpia.</p>
+                        <div class="card-tech">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>Flexbox</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card" style="border-style: dashed; opacity: 0.8;">
+                        <div class="card-header">
+                            <i class="ph ph-rocket-launch folder-icon" style="color: var(--text-secondary);"></i>
+                        </div>
+                        <h3>Landing Pages Comerciales</h3>
+                        <p>Creación de sitios web "One-Page" para negocios locales. Optimización de velocidad y contacto directo.</p>
+                        <div class="card-tech">
+                            <span>En Desarrollo</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card" style="border-style: dashed; opacity: 0.8;">
+                        <div class="card-header">
+                            <i class="ph ph-calculator folder-icon" style="color: var(--text-secondary);"></i>
+                        </div>
+                        <h3>Dashboard de Finanzas</h3>
+                        <p>Aplicación web para control de gastos personales utilizando LocalStorage y gráficos interactivos.</p>
+                        <div class="card-tech">
+                            <span>Idea Futura</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="hire-me-card">
+                    <div class="hire-content">
+                        <h2>¿Por qué sumarme a tu equipo?</h2>
+                        <p>
+                            No soy solo una programadora; soy una profesional con visión administrativa. 
+                            Mi formación en <strong>Contabilidad</strong> me permite entender los procesos de negocio, 
+                            mientras que mi <strong>Ingeniería</strong> me da la capacidad técnica para automatizarlos.
+                            Entrego código limpio, documentación clara (manuales) y resultados premiados.
+                        </p>
+                        <div class="value-props">
+                            <div class="prop-item">
+                                <div class="prop-icon"><i class="ph ph-check"></i></div>
+                                <span>Calidad Premiada (Infomatrix)</span>
+                            </div>
+                            <div class="prop-item">
+                                <div class="prop-icon"><i class="ph ph-check"></i></div>
+                                <span>Perfil Híbrido (Tech + Admin)</span>
+                            </div>
+                            <div class="prop-item">
+                                <div class="prop-icon"><i class="ph ph-check"></i></div>
+                                <span>Documentación Detallada</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-primary" style="padding: 15px 30px; border-radius: 12px; border:none; cursor: pointer; white-space: nowrap; font-size: 1rem;" onclick="window.location.href='contacto.html'">
+                        Iniciar Conversación
+                    </button>
+                </div>
+
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

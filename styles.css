@@ -1,0 +1,328 @@
+/* Archivo: styles.css */
+
+/* --- 1. MOTRIZ DE TEMAS (Variables de Color) --- */
+
+/* TEMA OSCURO (Por defecto) */
+:root[data-theme="dark"] {
+    --bg-main: #0f172a;
+    --bg-sidebar: #1e293b;
+    --bg-card: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent: #38bdf8;
+    --border: #334155;
+    --hover: #334155;
+    --shadow: rgba(0, 0, 0, 0.3);
+}
+
+/* TEMA CLARO - Corporativo */
+:root[data-theme="light"] {
+    --bg-main: #f8fafc;
+    --bg-sidebar: #ffffff;
+    --bg-card: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --accent: #3b82f6;
+    --border: #e2e8f0;
+    --hover: #f1f5f9;
+    --shadow: rgba(0, 0, 0, 0.05);
+}
+
+/* TEMA CLARO - Academia Moon */
+:root[data-theme="academia"] {
+    --bg-main: #f4f1ea;
+    --bg-sidebar: #2c2420;
+    --bg-card: #ffffff;
+    --text-primary: #2c2420;
+    --text-secondary: #5d544e;
+    --accent: #556b2f; /* Verde oliva */
+    --border: #d8cab8;
+    --hover: #e9e0d5;
+    --shadow: rgba(44, 36, 32, 0.1);
+}
+
+/* --- 2. LAYOUT BASE --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    transition: background 0.3s, color 0.3s;
+    overflow: hidden; /* Evita doble scroll */
+}
+
+.app-container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    height: 100vh;
+    transition: grid-template-columns 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.app-container.collapsed {
+    grid-template-columns: 80px 1fr;
+}
+
+/* --- 3. SIDEBAR COMPONENT --- */
+.sidebar {
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 100;
+}
+
+/* Header del Sidebar */
+.sidebar .sidebar-header {
+    position: relative;
+    padding: 30px 24px;
+    display: flex;
+    align-items: center;
+    height: 100px;
+}
+.sidebar .logo { display: flex; align-items: center; gap: 12px; }
+.sidebar .logo-img { width: 32px; height: 32px; object-fit: contain; flex-shrink: 0; }
+.sidebar .logo-text { font-weight: 700; font-size: 1.1rem; white-space: nowrap; color: var(--text-primary); }
+
+/* Botón Toggle Flotante */
+.sidebar .toggle-btn {
+    position: absolute; right: -14px; top: 50%; transform: translateY(-50%);
+    background: var(--accent); color: #fff;
+    width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--bg-main);
+    cursor: pointer; display: flex; justify-content: center; align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15); z-index: 110;
+    transition: all 0.3s ease;
+}
+.sidebar .toggle-btn:hover { transform: translateY(-50%) scale(1.1); }
+
+/* Navegación */
+.sidebar .sidebar-nav { flex: 1; padding: 10px 0; }
+.sidebar .sidebar-nav ul { list-style: none; padding: 0; margin: 0; }
+.sidebar .sidebar-nav li { width: 100%; }
+
+/* ENLACES (Sin subrayado y estilo limpio) */
+.sidebar .sidebar-nav .nav-item {
+    text-decoration: none; /* CLAVE: Cero subrayados */
+    padding: 14px 24px;
+    display: flex; align-items: center; gap: 16px;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    position: relative; width: 100%;
+}
+
+.sidebar .sidebar-nav .nav-item:hover,
+.sidebar .sidebar-nav .nav-item.active {
+    color: var(--accent);
+    background: var(--hover);
+}
+
+.sidebar .sidebar-nav .nav-item.active::before {
+    content: ''; position: absolute; left: 0;
+    height: 60%; width: 4px;
+    background: var(--accent); border-radius: 0 4px 4px 0;
+}
+
+.sidebar .sidebar-nav .nav-item i { font-size: 22px; min-width: 24px; }
+.sidebar .sidebar-nav .nav-item .nav-text { font-size: 0.95rem; font-weight: 500; }
+
+/* Comportamiento Colapsado */
+.app-container.collapsed .logo-text,
+.app-container.collapsed .nav-text { display: none; }
+.app-container.collapsed .toggle-btn i { transform: rotate(180deg); }
+
+
+/* --- 4. TOP BAR --- */
+.main-content { padding: 0 40px 40px 40px; overflow-y: auto; height: 100vh; }
+
+.top-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--bg-card); padding: 0 25px; height: 65px;
+    border-radius: 0 0 16px 16px; border: 1px solid var(--border); border-top: none;
+    position: sticky; top: 0; z-index: 90; margin-bottom: 30px;
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.left-section { display: flex; align-items: center; gap: 15px; }
+.view-indicator { 
+    display: flex; align-items: center; gap: 8px; 
+    font-weight: 600; font-size: 0.85rem; color: var(--accent); text-transform: uppercase; 
+}
+
+/* Controles de Tema */
+.theme-controls { display: flex; align-items: center; gap: 20px; }
+.theme-variant-container { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); }
+.theme-variant-container.disabled { opacity: 0.3; pointer-events: none; filter: grayscale(1); }
+#variant-switcher { border: none; background: transparent; color: var(--text-primary); font-weight: 600; cursor: pointer; outline: none; }
+.divider { width: 1px; height: 24px; background: var(--border); }
+
+/* Switch Toggle */
+.switch { position: relative; display: inline-block; width: 44px; height: 22px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--border); transition: .4s; border-radius: 34px; }
+.slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: var(--accent); }
+input:checked + .slider:before { transform: translateX(22px); }
+
+
+/* --- 5. VISUAL DASHBOARD (Estilos Nuevos) --- */
+
+.view-header { margin-bottom: 25px; }
+.view-header h1 { font-size: 1.8rem; font-weight: 800; color: var(--text-primary); }
+.card { background: var(--bg-card); padding: 24px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 15px var(--shadow); }
+
+/* LAYOUT SPLIT: Tarjeta (Izq) | Tabla (Der) */
+.dashboard-split {
+    display: grid;
+    /* Perfil 350px fijo, Tabla resto del espacio */
+    grid-template-columns: 350px 1fr; 
+    gap: 24px;
+    align-items: start;
+}
+
+/* --- TABLA VISUAL DE PROYECTOS --- */
+.projects-widget { padding: 0; overflow: hidden; }
+
+/* Header del Widget (Corrección para que el botón no se caiga) */
+.projects-widget .widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 24px 15px 24px;
+    margin-bottom: 0;
+    width: 100%;
+    flex-wrap: nowrap; /* Evita saltos de línea */
+}
+
+.projects-widget .widget-header h3 { margin: 0; white-space: nowrap; }
+.btn-icon { background: none; border: none; color: var(--text-secondary); font-size: 20px; cursor: pointer; flex-shrink: 0; margin-left: 15px; }
+.projects-widget .table-responsive { padding: 0 24px 24px 24px; }
+
+/* Estructura de la Tabla */
+.visual-table { 
+    width: 100%; 
+    border-collapse: separate; 
+    border-spacing: 0 12px;
+    table-layout: fixed; 
+}
+
+/* ANCHOS DE COLUMNA (Ajuste Final para que quepan los nombres) */
+.visual-table th:nth-child(1) { width: 30%; } /* Proyecto: Amplio para el texto */
+.visual-table th:nth-child(2) { width: 12%; }  /* Stack: Pequeño (iconos) */
+.visual-table th:nth-child(3) { width: 14%; } /* Estado */
+.visual-table th:nth-child(4) { width: 43%; } /* Tecnologías: Amplio para los chips */
+
+.visual-table th { 
+    text-align: left; 
+    color: var(--text-secondary); 
+    font-size: 0.85rem; 
+    font-weight: 500; 
+    padding: 0 10px;
+}
+
+.visual-table td { 
+    vertical-align: middle; 
+    padding: 0 10px; 
+}
+
+/* Elementos dentro de la tabla */
+.project-info { display: flex; align-items: center; gap: 15px; }
+.p-icon {
+    width: 40px; height: 40px; border-radius: 10px; 
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; color: white; font-size: 14px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); flex-shrink: 0;
+}
+.p-icon.php { background: linear-gradient(135deg, #777BB3, #5a5e9a); }
+.p-icon.js { background: linear-gradient(135deg, #F7DF1E, #dcb916); color: #333; }
+.p-icon.support { background: linear-gradient(135deg, #10b981, #059669); }
+
+.p-text { display: flex; flex-direction: column; overflow: hidden; }
+.p-name { font-weight: 600; color: var(--text-primary); font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.p-date { font-size: 0.75rem; color: var(--text-secondary); }
+
+.status-badge { padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; display: inline-block; }
+.status-badge.completed { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+.status-badge.active { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+.status-badge.pending { background: rgba(249, 115, 22, 0.15); color: #f97316; }
+
+.tech-stack-mini { display: flex; gap: 8px; color: var(--text-secondary); font-size: 18px; }
+
+/* Estilo "Chips" para Tecnologías */
+.tech-tags-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.tech-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    background-color: var(--bg-sidebar);
+    border: 1px solid var(--border);
+    border-radius: 20px; /* Forma de píldora */
+    padding: 5px 12px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.tech-tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background-color: var(--hover);
+}
+
+/* --- TARJETA DE PERFIL (Izquierda) --- */
+.profile-widget { padding: 0; text-align: center; position: relative; overflow: hidden; }
+.profile-header-bg { height: 100px; background: linear-gradient(135deg, var(--accent), var(--hover)); opacity: 0.8; }
+.profile-content { padding: 0 24px 30px 24px; position: relative; margin-top: -50px; }
+
+.profile-avatar img {
+    width: 100px; height: 100px; border-radius: 50%;
+    border: 4px solid var(--bg-card); background: var(--bg-card);
+    object-fit: contain; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.profile-name { font-size: 1.2rem; margin-top: 10px; color: var(--text-primary); }
+.profile-role { color: var(--accent); font-size: 0.9rem; font-weight: 600; display: block; margin-bottom: 15px; }
+.profile-bio { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 20px; }
+
+.profile-stats {
+    display: flex; justify-content: space-around;
+    padding: 15px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+}
+.stat { display: flex; flex-direction: column; }
+.stat-num { font-weight: 700; color: var(--text-primary); font-size: 1.1rem; }
+.stat-label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; }
+
+.profile-actions { display: flex; gap: 10px; }
+.full-width { flex: 1; padding: 10px; border-radius: 8px; font-size: 0.9rem; cursor: pointer; border: none; font-weight: 600; }
+.btn-primary { background: var(--accent); color: white; transition: 0.2s; }
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-primary); }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+/* --- RESPONSIVE --- */
+.mobile-only { display: none; }
+
+@media (max-width: 1024px) {
+    .dashboard-split { grid-template-columns: 1fr; } /* Stack vertical en tablets */
+}
+
+@media (max-width: 768px) {
+    .app-container { grid-template-columns: 1fr; }
+    .sidebar { position: fixed; left: -250px; height: 100vh; transition: 0.3s; }
+    .sidebar.mobile-active { left: 0; }
+    .mobile-only { display: flex; background: none; border: none; font-size: 24px; color: var(--text-primary); }
+    .main-content { padding: 0 20px 20px 20px; }
+    .top-bar { margin: 0 -20px 20px -20px; border-radius: 0; }
+    .toggle-btn { display: none; }
+}

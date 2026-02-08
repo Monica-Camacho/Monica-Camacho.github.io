@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | Moon Dev & Tech</title>
+    <link rel="icon" type="image/png" href="img/logo_moon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* --- ESTILOS DE LIMPIEZA (LA OPCIÓN NUCLEAR) --- */
+        
+        /* Contenedor Principal: MATAMOS EL VERDE */
+        .layout-limpio {
+            background-color: transparent !important;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            padding: 2rem !important;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Cabecera: MATAMOS EL AZUL */
+        .header-sin-fondo {
+            background-color: transparent !important;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            margin-bottom: 2rem;
+            padding: 0 !important;
+        }
+
+        .header-sin-fondo h1 {
+            color: var(--text-main);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-sin-fondo p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* --- GRID Y TARJETAS --- */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 2rem;
+            width: 100%;
+            align-items: start;
+        }
+
+        /* Tarjetas Izquierda */
+        .contact-info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .contact-card {
+            background: var(--bg-card, #ffffff);
+            border: 1px solid var(--border-color, #e0e0e0);
+            padding: 1.5rem;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-color, #6c5ce7);
+        }
+
+        /* Iconos */
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .email-style .icon-box { background: rgba(234, 67, 53, 0.1); color: #ea4335; }
+        .wa-style .icon-box { background: rgba(37, 211, 102, 0.1); color: #25d366; }
+        .git-style .icon-box { background: rgba(108, 92, 231, 0.1); color: var(--text-main); }
+        .loc-style .icon-box { background: rgba(108, 92, 231, 0.1); color: #6c5ce7; }
+
+        .card-details h3 { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.2rem; font-weight: 500; }
+        .card-details p { font-size: 1.05rem; font-weight: 600; color: var(--text-main); margin: 0; }
+        
+        .arrow-icon { margin-left: auto; color: var(--accent-color); opacity: 0; transition: opacity 0.2s; }
+        .contact-card:hover .arrow-icon { opacity: 1; }
+
+        /* Formulario Derecha - ARREGLADO */
+        .contact-form-container {
+            background: var(--bg-card, #ffffff);
+            border: 1px solid var(--border-color, #e0e0e0);
+            border-radius: 20px;
+            padding: 2.5rem; /* Espacio interno generoso */
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            height: auto;
+        }
+
+        .contact-form-container h2 { margin-bottom: 0.5rem; font-size: 1.5rem; color: var(--text-main); }
+        .form-desc { color: var(--text-muted); margin-bottom: 2rem; }
+
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.6rem; font-size: 0.9rem; font-weight: 600; color: var(--text-main); }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: var(--bg-body, #f5f6fa);
+            border: 1px solid var(--border-color, #e0e0e0);
+            border-radius: 10px;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.2s;
+            box-sizing: border-box; /* ESTO EVITA QUE SE SALGA */
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color, #6c5ce7);
+            background: var(--bg-card);
+            box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1.1rem;
+            background: var(--accent-color, #6c5ce7);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: filter 0.2s, transform 0.1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .contact-wrapper { grid-template-columns: 1fr; }
+            .layout-limpio { padding: 1.5rem !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <img src="img/logo_moon.png" alt="Moon Logo" class="logo-img">
+                    <span class="logo-text">Moon Dev & Tech</span>
+                </div>
+                <button id="sidebar-toggle" class="toggle-btn"><i class="ph ph-caret-left"></i></button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-item"><i class="ph ph-house"></i><span class="nav-text">Inicio</span></a></li>
+                    <li><a href="desarrollo.html" class="nav-item"><i class="ph ph-code"></i><span class="nav-text">Desarrollo Web</span></a></li>
+                    <li><a href="servicios.html" class="nav-item"><i class="ph ph-wrench"></i><span class="nav-text">Servicios Técnicos</span></a></li>
+                    <li><a href="contacto.html" class="nav-item active"><i class="ph ph-paper-plane-tilt"></i><span class="nav-text">Contáctame</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            
+            <header class="top-bar">
+                <div class="left-section">
+                    <button id="mobile-menu-btn" class="mobile-only"><i class="ph ph-list"></i></button>
+                    <div class="view-indicator"><i class="ph ph-paper-plane-tilt"></i><span>CONTACTO</span></div>
+                </div>
+
+                <div class="theme-controls">
+                    <div class="theme-variant-container" id="variant-container">
+                        <i class="ph ph-palette"></i>
+                        <select id="variant-switcher">
+                            <option value="light">Corporativo</option>
+                            <option value="academia">Academia Moon</option>
+                        </select>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="main-toggle">
+                        <i class="ph ph-moon"></i>
+                        <label class="switch">
+                            <input type="checkbox" id="dark-mode-toggle" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </header>
+
+            <div class="layout-limpio">
+                
+                <div class="header-sin-fondo">
+                    <h1>Hablemos de tu Proyecto</h1>
+                    <p>¿Tienes una idea en mente o necesitas soporte técnico? Estoy lista para ayudar.</p>
+                </div>
+
+                <div class="contact-wrapper">
+                    <div class="contact-info-list">
+                        
+                        <div class="contact-card email-style" onclick="window.location.href='mailto:0.monica.camacho@gmail.com'">
+                            <div class="icon-box"><i class="ph ph-envelope-simple"></i></div>
+                            <div class="card-details">
+                                <h3>Envíame un correo</h3>
+                                <p>Monigpe.0@gmail.com</p>
+                            </div>
+                            <i class="ph ph-arrow-right arrow-icon"></i>
+                        </div>
+
+                        <div class="contact-card wa-style" onclick="window.open('https://wa.me/529931546794', '_blank')">
+                            <div class="icon-box"><i class="ph ph-whatsapp-logo"></i></div>
+                            <div class="card-details">
+                                <h3>WhatsApp Directo</h3>
+                                <p>+52 993 154 6794</p>
+                            </div>
+                            <i class="ph ph-arrow-right arrow-icon"></i>
+                        </div>
+
+                        <div class="contact-card git-style" onclick="window.open('https://github.com/Monica-Camacho', '_blank')">
+                            <div class="icon-box"><i class="ph ph-github-logo"></i></div>
+                            <div class="card-details">
+                                <h3>Revisa mi código</h3>
+                                <p>github.com/Monica-Camacho</p>
+                            </div>
+                            <i class="ph ph-arrow-right arrow-icon"></i>
+                        </div>
+
+                         <div class="contact-card loc-style">
+                            <div class="icon-box"><i class="ph ph-map-pin"></i></div>
+                            <div class="card-details">
+                                <h3>Ubicación</h3>
+                                <p>Villahermosa, Tabasco</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="contact-form-container">
+                        <h2>Envíame un mensaje</h2>
+                        <p class="form-desc">Te responderé lo antes posible para agendar una revisión.</p>
+                        
+                        <form action="mailto:0.monica.camacho@gmail.com" method="post" enctype="text/plain">
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                <input type="text" class="form-control" placeholder="Tu nombre" name="nombre">
+                            </div>
+                            <div class="form-group">
+                                <label>Asunto</label>
+                                <input type="text" class="form-control" placeholder="Desarrollo Web / Soporte / Cotización" name="asunto">
+                            </div>
+                            <div class="form-group">
+                                <label>Mensaje</label>
+                                <textarea class="form-control" rows="5" placeholder="Cuéntame sobre tu proyecto..." name="mensaje"></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit">
+                                <span>Enviar Mensaje</span>
+                                <i class="ph ph-paper-plane-right"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div> </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
