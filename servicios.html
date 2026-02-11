@@ -11,80 +11,6 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
-    <style>
-        #content-area { margin-top: 30px; }
-
-        /* --- HERO --- */
-        .services-hero {
-            background: linear-gradient(135deg, var(--bg-card), var(--bg-sidebar));
-            border: 1px solid var(--border); border-radius: 16px;
-            padding: 40px; text-align: center; margin-bottom: 40px;
-            position: relative; overflow: hidden;
-        }
-        .hero-bg-icon {
-            position: absolute; top: -20px; right: -20px;
-            font-size: 200px; color: var(--accent); opacity: 0.03; transform: rotate(15deg);
-        }
-        .services-hero h1 { font-size: 2rem; margin-bottom: 10px; color: var(--text-primary); }
-        .services-hero p { color: var(--text-secondary); max-width: 600px; margin: 0 auto 25px auto; font-size: 1.05rem; }
-
-        /* --- GRID DE SERVICIOS --- */
-        .services-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px; margin-bottom: 40px;
-        }
-
-        .service-card {
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 16px; padding: 30px;
-            transition: transform 0.2s, border-color 0.2s;
-            display: flex; flex-direction: column; height: 100%;
-        }
-        .service-card:hover { transform: translateY(-5px); border-color: var(--accent); }
-
-        .icon-wrapper {
-            width: 60px; height: 60px; border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 32px; margin-bottom: 20px;
-        }
-        
-        /* Colores por categoría */
-        .web-style { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; } /* Violeta */
-        .hw-style { background: rgba(59, 130, 246, 0.1); color: #3b82f6; } /* Azul */
-        .rescue-style { background: rgba(239, 68, 68, 0.1); color: #ef4444; } /* Rojo */
-        .auto-style { background: rgba(16, 185, 129, 0.1); color: #10b981; } /* Verde */
-
-        .service-card h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--text-primary); }
-        .service-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
-
-        .service-features { list-style: none; padding: 0; margin-bottom: 20px; }
-        .service-features li {
-            display: flex; align-items: center; gap: 10px;
-            color: var(--text-primary); font-size: 0.9rem; margin-bottom: 8px;
-        }
-        .service-features li i { color: var(--accent); font-size: 16px; }
-
-        .card-footer-btn {
-            width: 100%; padding: 12px; border: 1px solid var(--border); background: transparent;
-            border-radius: 8px; color: var(--text-primary); font-weight: 600; cursor: pointer; transition: 0.2s;
-        }
-        .card-footer-btn:hover { background: var(--hover); color: var(--accent); border-color: var(--accent); }
-
-        /* --- PÓLIZAS --- */
-        .poliza-section {
-            background: var(--bg-sidebar); border: 1px solid var(--border);
-            border-radius: 16px; padding: 30px; display: flex; align-items: center; justify-content: space-between;
-            gap: 20px; flex-wrap: wrap;
-        }
-        .poliza-content h3 { color: var(--text-primary); margin-bottom: 10px; }
-        .poliza-content p { color: var(--text-secondary); max-width: 600px; }
-        .btn-poliza {
-            background: var(--accent); color: white; border: none; padding: 12px 24px;
-            border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap;
-        }
-
-    </style>
 </head>
 <body>
 
@@ -121,8 +47,9 @@
                     <div class="theme-variant-container" id="variant-container">
                         <i class="ph ph-palette"></i>
                         <select id="variant-switcher">
-                            <option value="light">Corporativo</option>
-                            <option value="academia">Academia Moon</option>
+                            <option value="moon">Lavanda</option>
+                            <option value="espresso">Espresso</option>
+                            <option value="ocean">Ocean Blue</option>
                         </select>
                     </div>
                     <div class="divider"></div>

@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. SELECTORES GLOBALES ---
+    // ==========================================================================
+    // 1. SELECTORES GLOBALES
+    // ==========================================================================
     const appContainer = document.querySelector('.app-container');
     const sidebar = document.getElementById('sidebar');
     
@@ -8,66 +10,84 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleBtn = document.getElementById('sidebar-toggle');
     const mobileBtn = document.getElementById('mobile-menu-btn');
     
-    // Controles de Tema (Top Bar)
+    // Controles de Tema (Ubicados en el Top Bar)
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const variantSwitcher = document.getElementById('variant-switcher');
+    
+    // (Opcional) Contenedor del selector, por si quisiéramos ocultarlo, 
+    // pero en este nuevo diseño lo dejamos siempre visible.
     const variantContainer = document.getElementById('variant-container');
 
-    // NOTA: Ya no seleccionamos .nav-items ni .views porque la navegación
-    // ahora es nativa del navegador mediante los enlaces <a href> en el HTML.
 
-    // --- 2. LÓGICA DE TEMAS (Persistencia entre páginas) ---
+    // ==========================================================================
+    // 2. LÓGICA DE TEMAS INTELIGENTE (La Magia)
+    // ==========================================================================
+    
     function applyTheme() {
-        // Verificamos si los elementos existen (por seguridad)
+        // Verificación de seguridad: si no existen los controles, no hacemos nada
         if (!darkModeToggle || !variantSwitcher) return;
 
         const isDark = darkModeToggle.checked;
-        const selectedVariant = variantSwitcher.value;
+        const selectedVariant = variantSwitcher.value; // 'moon', 'espresso', 'ocean'
 
         if (isDark) {
-            // Modo Oscuro activado
-            document.documentElement.setAttribute('data-theme', 'dark');
-            if(variantContainer) variantContainer.classList.add('disabled');
+            // MODO OSCURO INTELIGENTE:
+            // En lugar de poner solo 'dark', combinamos "variante + dark".
+            // Ejemplo: si elegiste 'moon', aplica 'moon-dark'.
+            document.documentElement.setAttribute('data-theme', `${selectedVariant}-dark`);
+            
+            // Aseguramos que el selector de variantes siga activo
+            if(variantContainer) variantContainer.classList.remove('disabled');
         } else {
-            // Modo Claro activado
+            // MODO CLARO NORMAL:
+            // Aplica el tema tal cual viene del selector (ej: 'moon').
             document.documentElement.setAttribute('data-theme', selectedVariant);
+            
             if(variantContainer) variantContainer.classList.remove('disabled');
         }
 
-        // Guardar en LocalStorage para que al cambiar de página se mantenga el color
+        // Guardamos las preferencias en la memoria del navegador
         localStorage.setItem('moon-dark-mode', isDark);
         localStorage.setItem('moon-variant', selectedVariant);
     }
 
-    // Listeners de cambio de tema
+    // Escuchamos los cambios en el switch y en el selector
     if(darkModeToggle) darkModeToggle.addEventListener('change', applyTheme);
     if(variantSwitcher) variantSwitcher.addEventListener('change', applyTheme);
 
-    // Cargar preferencias guardadas al iniciar cualquier página
+    // Función para cargar lo que el usuario guardó la última vez
     function loadSavedPreferences() {
         const savedDark = localStorage.getItem('moon-dark-mode');
         const savedVariant = localStorage.getItem('moon-variant');
 
-        if (savedDark !== null && darkModeToggle) {
-            darkModeToggle.checked = (savedDark === 'true');
-        }
+        // 1. Restaurar la variante (color)
         if (savedVariant !== null && variantSwitcher) {
             variantSwitcher.value = savedVariant;
         }
+        
+        // 2. Restaurar el modo oscuro (Check del switch)
+        if (savedDark !== null && darkModeToggle) {
+            darkModeToggle.checked = (savedDark === 'true');
+        }
 
+        // 3. Aplicar los cambios
         applyTheme();
     }
     
+    // Ejecutamos la carga al iniciar
     loadSavedPreferences();
 
-    // --- 3. CONTROL DEL SIDEBAR (Funcionalidad UI) ---
+
+    // ==========================================================================
+    // 3. CONTROL DEL SIDEBAR (Funcionalidad UI)
+    // ==========================================================================
     
-    // Toggle Desktop (Colapsar a mini)
+    // A) Toggle Desktop (Colapsar barra lateral a modo mini)
     if (toggleBtn) {
         toggleBtn.addEventListener('click', () => {
             appContainer.classList.toggle('collapsed');
             
-            // Rotación del icono de la flecha
+            // Rotación del icono de la flecha (< a >)
             const icon = toggleBtn.querySelector('i');
             if (icon) {
                 if (appContainer.classList.contains('collapsed')) {
@@ -79,17 +99,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Toggle Móvil (Abrir/Cerrar Drawer)
+    // B) Toggle Móvil (Abrir/Cerrar menú en celulares)
     if (mobileBtn) {
         mobileBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Evita que el click llegue al document
+            e.stopPropagation(); // Evita que el clic se propague al documento
             sidebar.classList.toggle('mobile-active');
         });
     }
 
-    // Cerrar sidebar móvil al hacer clic fuera de él
+    // C) Cerrar sidebar móvil al hacer clic fuera de él (UX)
     document.addEventListener('click', (e) => {
+        // Solo aplica si estamos en pantalla pequeña y el menú está abierto
         if (window.innerWidth <= 768 && sidebar && mobileBtn) {
+            // Si el clic NO fue en el sidebar Y NO fue en el botón de abrir
             if (!sidebar.contains(e.target) && !mobileBtn.contains(e.target)) {
                 sidebar.classList.remove('mobile-active');
             }
