@@ -198,7 +198,7 @@ body {
 .app-container.collapsed .toggle-btn i { transform: rotate(180deg); }
 
 /* ==========================================================================
-   5. TOP BAR & SELECTOR (Corrección Visual)
+   5. TOP BAR & SELECTOR
    ========================================================================== */
 .top-bar {
     display: flex; justify-content: space-between; align-items: center;
@@ -217,12 +217,10 @@ body {
 .theme-controls { display: flex; align-items: center; gap: 20px; }
 .theme-variant-container { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); }
 
-/* --- CORRECCIÓN DEL SELECTOR --- */
-/* Forzamos colores para que siempre se vea, no importa el navegador */
 #variant-switcher { 
     border: 1px solid var(--border); 
-    background: var(--bg-card); /* Usa el fondo de la tarjeta */
-    color: var(--text-primary); /* Texto visible según el tema */
+    background: var(--bg-card); 
+    color: var(--text-primary); 
     font-weight: 600; 
     cursor: pointer; 
     outline: none; 
@@ -365,7 +363,6 @@ input:checked + .slider:before { transform: translateX(22px); }
 .icon-wrapper { width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 32px; margin-bottom: 20px; background: var(--accent-light); color: var(--accent); }
 
 /* --- RESTAURACIÓN DE COLORES DE SERVICIOS --- */
-/* Si prefieres colores específicos para cada tarjeta, descomenta esto: */
 .web-style { background: rgba(139, 92, 246, 0.1) !important; color: #8b5cf6 !important; } 
 .hw-style { background: rgba(59, 130, 246, 0.1) !important; color: #3b82f6 !important; } 
 .rescue-style { background: rgba(239, 68, 68, 0.1) !important; color: #ef4444 !important; } 
@@ -432,8 +429,7 @@ input:checked + .slider:before { transform: translateX(22px); }
     color: var(--accent); 
 }
 
-/* --- RESTAURACIÓN DE COLORES DE MARCA (WhatsApp, Gmail, Etc) --- */
-/* Estos !important aseguran que el color de marca gane sobre el tema */
+/* --- COLORES DE MARCA (WhatsApp, Gmail, Etc) --- */
 .wa-style .icon-box { background: rgba(37, 211, 102, 0.1) !important; color: #25d366 !important; }
 .email-style .icon-box { background: rgba(234, 67, 53, 0.1) !important; color: #ea4335 !important; }
 .git-style .icon-box { background: rgba(0, 0, 0, 0.05) !important; color: var(--text-primary) !important; }
@@ -482,24 +478,216 @@ input:checked + .slider:before { transform: translateX(22px); }
 /* ==========================================================================
    11. RESPONSIVE
    ========================================================================== */
+
+/* TABLETS (Entre 769px y 1024px) */
 @media (max-width: 1024px) {
-    .dashboard-split { grid-template-columns: 1fr; }
+
+    body.page-servicios .view-indicator span { display: none; }
+    body.page-servicios .view-indicator::after { content: "SERVICIOS"; }
+
+    body.page-desarrollo .view-indicator span { display: none; }
+    body.page-desarrollo .view-indicator::after { content: "DESARROLLO"; }
+
+    .bio-header { 
+        flex-direction: column; 
+        align-items: center; 
+        text-align: center; 
+    }
+    .profile-pic-lg { 
+        margin-right: 0; 
+        margin-bottom: 15px; 
+    }
+    
+    /* Cambiar el orden: Derecha (Experiencia) PRIMERO, Izquierda (Skills) DESPUÉS */
+    .dashboard-split { 
+        display: flex; 
+        flex-direction: column-reverse;
+        gap: 24px;
+    }
+
+
+    /* --- 3. DESARROLLO: HIRE ME CARD --- */
+    .hire-me-card { 
+        flex-direction: column; 
+        text-align: center; 
+        align-items: center; 
+        padding: 30px;
+    }
+    
+    .hire-content p { 
+        margin: 0 auto 25px auto; 
+        max-width: 100%; 
+    }
+    
+    .value-props { 
+        justify-content: center; 
+        margin-bottom: 20px;
+    }
+
+
+    /* --- 4. AJUSTES GENERALES TABLET --- */
     .contact-wrapper { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 900px) {
     .hero-project { grid-template-columns: 1fr; }
-    .project-visual { height: 200px; border-left: none; border-top: 1px solid var(--border); }
-    .hire-me-card { flex-direction: column; text-align: left; align-items: start; }
+    
+    .project-visual { 
+        height: 300px; 
+        border-left: none; 
+        border-top: 1px solid var(--border); 
+    }
 }
 
+/* CELULARES  */
 @media (max-width: 768px) {
-    .app-container { grid-template-columns: 1fr; }
-    .sidebar { position: fixed; left: -250px; height: 100vh; transition: 0.3s; width: 250px; }
+    
+    body {
+        overflow: auto !important;
+        height: auto !important;
+    }
+
+    .app-container { 
+        grid-template-columns: 1fr; 
+        height: auto; 
+        overflow: visible;
+    }
+
+    .main-content {
+        padding: 0 20px 80px 20px !important; 
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    /* 2. BARRA SUPERIOR MINIMALISTA */
+    .top-bar { 
+        margin: 0 -20px 25px -20px; 
+        border-radius: 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 0 20px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--bg-card);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    /* OCULTAR TEXTO */
+    .view-indicator {
+        font-size: 0 !important; 
+    }
+    
+    .view-indicator span { 
+        display: none !important; 
+    }
+    
+    .view-indicator i { 
+        font-size: 1.8rem !important; 
+        color: var(--accent); 
+        display: block;
+    }
+
+    /* Botón Hamburguesa */
+    .mobile-only { 
+        display: flex; 
+        background: none; border: none; 
+        font-size: 28px; color: var(--text-primary); 
+        cursor: pointer; padding: 0; margin-right: 15px;
+    }
+
+    /* Ocultar elementos de escritorio */
+    .toggle-btn, #sidebar-toggle { display: none !important; }
+
+    /* Controles (Selector + Dark Mode) */
+    .theme-controls { gap: 12px; }
+    .divider { display: none; } 
+    
+    #variant-switcher {
+        width: 110px; 
+        font-size: 0.75rem;
+        padding: 6px;
+        height: 36px;
+    }
+
+    /* --- 3. NUEVO BOTÓN DARK MODE (Estilo Botón) --- */
+    /* Ocultamos la luna decorativa original para usar la nuestra integrada */
+    .main-toggle > i.ph-moon { display: none; } 
+
+    .main-toggle {
+        position: relative;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .switch {
+        width: 100%; height: 100%;
+        margin: 0;
+    }
+
+    /* Ocultamos el input real pero lo dejamos clickable */
+    .switch input { 
+        opacity: 0; width: 100%; height: 100%; 
+        position: absolute; top: 0; left: 0; z-index: 10;
+        cursor: pointer;
+    }
+
+    /* El "Slider" ahora es el botón redondo */
+    .slider {
+        position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+        background-color: var(--bg-input); /* Fondo gris suave por defecto */
+        border: 1px solid var(--border);
+        border-radius: 50%; /* Círculo perfecto */
+        transition: .3s;
+        box-shadow: none;
+    }
+    
+    .slider:before { display: none; }
+
+    /* Icono de luna DENTRO del botón */
+    .slider::after {
+        content: ''; 
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        width: 16px; height: 16px;
+        background-color: var(--text-secondary); /* Color de la luna apagada */
+        mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M216.7,152.6A91.9,91.9,0,0,1,103.4,39.3h0a92,92,0,1,0,113.3,113.3Z" fill="black"/></svg>');
+        -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M216.7,152.6A91.9,91.9,0,0,1,103.4,39.3h0a92,92,0,1,0,113.3,113.3Z" fill="black"/></svg>');
+        mask-size: cover;
+        -webkit-mask-size: cover;
+    }
+
+    /* ESTADO ACTIVO (Seleccionado) */
+    input:checked + .slider {
+        background-color: var(--accent); /* Se pinta del color del tema */
+        border-color: var(--accent);
+    }
+
+    input:checked + .slider::after {
+        background-color: white; /* La luna se vuelve blanca */
+    }
+
+
+    /* 4. MENÚ LATERAL MÓVIL */
+    .sidebar { 
+        position: fixed; left: -100%; top: 0; height: 100vh; width: 280px;
+        z-index: 2000; transition: left 0.3s ease;
+        box-shadow: 10px 0 30px rgba(0,0,0,0.3);
+    }
     .sidebar.mobile-active { left: 0; }
-    .main-content { padding: 0 20px 20px 20px; }
-    .top-bar { margin: 0 -20px 20px -20px; border-radius: 0; }
-    .mobile-only { display: flex; background: none; border: none; font-size: 24px; color: var(--text-primary); }
-    .toggle-btn { display: none; }
-    .layout-limpio { padding: 1rem !important; }
+    .sidebar.mobile-active::before {
+        content: ''; position: fixed; top: 0; left: 280px; right: -100vw; bottom: 0; height: 100vh;
+        background: rgba(0,0,0,0.6); backdrop-filter: blur(2px); z-index: -1;
+    }
+
+    /* 5. AJUSTES DE CONTENIDO (Evitar cortes) */
+    .dashboard-split { display: flex; flex-direction: column-reverse; gap: 30px; }
+    .bio-header { flex-direction: column; text-align: center; }
+    .profile-pic-lg { margin-bottom: 15px; }
+    .hire-me-card { flex-direction: column; text-align: center; padding: 25px; }
+    .value-props { justify-content: center; }
+    .layout-limpio { padding: 0 !important; }
 }
